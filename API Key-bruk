@@ -1,0 +1,10 @@
+API-key: 0WG45BuPiqL-VXb50LlqT31wTU41Wf_x-QlFKKQ
+
+Eksempel på bruk:
+<com.google.android.maps.MapView
+	android:id="@+id/mapWorld"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:enabled="true"
+	android:clickable="true"
+	android:apiKey="0WG45BuPiqL-VXb50LlqT31wTU41Wf_x-QlFKKQ" />

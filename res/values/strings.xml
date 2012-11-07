@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="app_name">Flickr Image Search</string>
+    <string name="menu_settings">No settings for you!</string>
+   
+    <string name="title_activity_tag_manager">Tag manager</string>
+    <string name="title_activity_search_results">Search results for</string>
+	
+	<string name="button_search">Search</string>
+	<string name="button_list">List</string>
+	<string name="button_maps">Maps</string>
+	
+	<string name="image_view_content">An image from Flickr</string>
+</resources>
