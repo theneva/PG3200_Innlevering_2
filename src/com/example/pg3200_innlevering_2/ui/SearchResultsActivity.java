@@ -23,7 +23,6 @@ import com.example.pg3200_innlevering_2.R;
 import com.example.pg3200_innlevering_2.dto.FlickrImageDTO;
 import com.example.pg3200_innlevering_2.ui.adapters.ImageAdapter;
 import com.example.pg3200_innlevering_2.util.ImageUtil;
-import com.example.pg3200_innlevering_2.util.TagUtil;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapActivity;
@@ -38,6 +37,8 @@ public class SearchResultsActivity extends MapActivity {
 	
 	private TabHost tabHost;
 	
+	private String query = "banana";
+	
 	// List stuff
 	private ListView listViewImages;
 	private List<FlickrImageDTO> images;
@@ -48,22 +49,24 @@ public class SearchResultsActivity extends MapActivity {
 	private MapController mapController;
 	private MarkerOverlay markerOverlay;
 	
-	// Full screen view stuff
-	private TextView textViewFullScreenImageTitle, textViewFullScreenImageDateTaken;
-	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search_results);
 		
 		context = this;
 		
+		// retrieve the query
+		Intent myIntent = getIntent();
+		myIntent.getStringExtra("query");
+		
 		initGui();
 		initListeners();
 	}
 	
 	protected void initGui() {
+		
 		// Update the label; kind of hackish, but it does the job
-		this.setTitle(this.getTitle() + " \"" + TagUtil.getLastUsedTag() + "\"");
+		this.setTitle(this.getTitle() + " \"" + query + "\"");
 		
 		// Not extending TabActivity and not inflating the tab host from XML
 		tabHost = (TabHost) findViewById(android.R.id.tabhost);
@@ -94,8 +97,8 @@ public class SearchResultsActivity extends MapActivity {
 		}));
 
 		// Hackish: Prevent the map from "bleeding through"
-//		tabHost.setCurrentTabByTag("Map");
-//		tabHost.setCurrentTabByTag("List");
+		tabHost.setCurrentTabByTag("Map");
+		tabHost.setCurrentTabByTag("List");
 		
 		// Get results and initialise adapter
 		new GetFlickrImageListTask().execute();
@@ -116,8 +119,8 @@ public class SearchResultsActivity extends MapActivity {
 		
 		// Set up the components
 		ImageView imageViewFullScreenImage = (ImageView) dialog.findViewById(R.id.imageViewFullScreenImage);
-		textViewFullScreenImageTitle = (TextView) dialog.findViewById(R.id.textViewFullScreenImageTitle);
-		textViewFullScreenImageDateTaken = (TextView) dialog.findViewById(R.id.textViewFullScreenImageDateTaken);
+		TextView textViewFullScreenImageTitle = (TextView) dialog.findViewById(R.id.textViewFullScreenImageTitle);
+		TextView textViewFullScreenImageDateTaken = (TextView) dialog.findViewById(R.id.textViewFullScreenImageDateTaken);
 		
 		FlickrImageDTO image = images.get(location);
 		imageViewFullScreenImage.setImageDrawable(image.getDrawableM());
@@ -155,7 +158,7 @@ public class SearchResultsActivity extends MapActivity {
 		protected List<FlickrImageDTO> doInBackground(Void... params) {
 			// TODO: Add a timeout
 			// Possible TODO: publish progress
-			return ImageUtil.getImages();
+			return ImageUtil.getImages(query);
 		}
 		
 		protected void onPostExecute(List<FlickrImageDTO> result) {

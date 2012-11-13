@@ -27,13 +27,13 @@ public class ImageUtil {
 	 * Gets the images from the stream with the given tag.
 	 * @return the images with the given tag.
 	 */
-	public static List<FlickrImageDTO> getImages() {
+	public static List<FlickrImageDTO> getImages(String query) {
 		URL url = null;
 		HttpURLConnection urlConnection = null;
 		
 		try {
-			// Accept the last used tag
-			url = new URL(URL + TagUtil.getLastUsedTag());
+			// Accept the query
+			url = new URL(URL + query);
 			urlConnection = (HttpURLConnection) url.openConnection();
 			
 			InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
