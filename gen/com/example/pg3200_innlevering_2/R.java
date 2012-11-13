@@ -11,6 +11,7 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int black=0x7f040002;
         public static final int light_grey=0x7f040001;
         public static final int white=0x7f040000;
     }
@@ -22,22 +23,27 @@ public final class R {
     public static final class id {
         public static final int buttonSearch=0x7f080003;
         public static final int editTextSearch=0x7f080002;
-        public static final int imageViewImage=0x7f080006;
-        public static final int linearLayoutImageContainer=0x7f080005;
-        public static final int linearLayoutTagContainer=0x7f080009;
+        public static final int imageViewFullScreenImage=0x7f080006;
+        public static final int imageViewImage=0x7f08000a;
+        public static final int linearLayoutFullScreenImage=0x7f080005;
+        public static final int linearLayoutImageContainer=0x7f080009;
+        public static final int linearLayoutTagContainer=0x7f08000d;
         public static final int listViewImages=0x7f080000;
         public static final int listViewTags=0x7f080004;
         public static final int mapView=0x7f080001;
-        public static final int menu_settings=0x7f08000b;
-        public static final int textViewImageDateTaken=0x7f080008;
-        public static final int textViewImageTitle=0x7f080007;
-        public static final int textViewTag=0x7f08000a;
+        public static final int menu_settings=0x7f08000f;
+        public static final int textViewFullScreenImageDateTaken=0x7f080008;
+        public static final int textViewFullScreenImageTitle=0x7f080007;
+        public static final int textViewImageDateTaken=0x7f08000c;
+        public static final int textViewImageTitle=0x7f08000b;
+        public static final int textViewTag=0x7f08000e;
     }
     public static final class layout {
         public static final int activity_search_results=0x7f030000;
         public static final int activity_tag_manager=0x7f030001;
-        public static final int list_item_image=0x7f030002;
-        public static final int list_item_tag=0x7f030003;
+        public static final int full_screen_image=0x7f030002;
+        public static final int list_item_image=0x7f030003;
+        public static final int list_item_tag=0x7f030004;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;
@@ -47,9 +53,10 @@ public final class R {
         public static final int button_list=0x7f050005;
         public static final int button_maps=0x7f050006;
         public static final int button_search=0x7f050004;
-        public static final int image_view_content=0x7f050008;
+        public static final int image_view_content=0x7f050007;
         public static final int menu_settings=0x7f050001;
-        public static final int text_view_loading=0x7f050007;
+        public static final int progress_dialog_message=0x7f050009;
+        public static final int progress_dialog_title=0x7f050008;
         public static final int title_activity_search_results=0x7f050003;
         public static final int title_activity_tag_manager=0x7f050002;
     }

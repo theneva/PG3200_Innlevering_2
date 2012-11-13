@@ -37,7 +37,7 @@ public final class TagAdapter extends BaseAdapter {
 	public long getItemId(int position) {
 		return position;
 	}
-
+	
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder viewHolder;
 		

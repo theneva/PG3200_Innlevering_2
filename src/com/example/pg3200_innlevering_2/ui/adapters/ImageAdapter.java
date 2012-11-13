@@ -24,8 +24,8 @@ public class ImageAdapter extends BaseAdapter{
 	}
 
 	public int getCount() {
+		// TODO: Give feedback if no results were found
 		// Prevent program from crashing if no images were retrieved
-		// TODO: Give feedback
 		return images != null ? images.size() : 0;
 	}
 
@@ -55,8 +55,6 @@ public class ImageAdapter extends BaseAdapter{
 			
 			viewHolder.textViewImageTitle.setText(image.getTitle());
 			viewHolder.textViewImageDateTaken.setText(image.getDateTaken());
-			
-			System.out.println("text views have had their text set. title = " + image.getTitle() + ", date taken = " + image.getDateTaken());
 			
 			convertView.setTag(viewHolder);
 		} else {

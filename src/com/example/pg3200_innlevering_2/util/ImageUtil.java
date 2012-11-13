@@ -121,9 +121,7 @@ public class ImageUtil {
 		
 		try {
 			in = new BufferedInputStream(new URL(url).openStream());
-			Drawable drawable = Drawable.createFromStream(in, "src");
-			System.out.println("Drawable has been created, x: " + drawable.getIntrinsicWidth() + ", y: " + drawable.getIntrinsicHeight());
-			return drawable;
+			return Drawable.createFromStream(in, "src");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
