@@ -17,6 +17,7 @@ import com.example.pg3200_innlevering_2.R;
 import com.example.pg3200_innlevering_2.db.QueryDAO;
 import com.example.pg3200_innlevering_2.ui.adapters.TagAdapter;
 import com.example.pg3200_innlevering_2.util.AbstractActivity;
+import com.example.pg3200_innlevering_2.util.QueryUtil;
 
 public class TagManagerActivity extends AbstractActivity {
 
@@ -61,16 +62,19 @@ public class TagManagerActivity extends AbstractActivity {
 					queryDAO.insertQuery(query);
 				}
 				
-				Intent intent = new Intent(new Intent(context, SearchResultsActivity.class));
-				startActivity(intent.putExtra("query", query));
+				QueryUtil.LAST_QUERY_USED = query;
+				Intent intent = new Intent(context, SearchResultsActivity.class);
+				startActivity(intent);
 			}
 		});
 		
 		listViewTags.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+				List<String> queries = queryDAO.getAllQueries();
+				// The list is displayed in reverse order, hence the "hack"
+				QueryUtil.LAST_QUERY_USED = queries.get(queries.size() - position - 1);
 				Intent intent = new Intent(context, SearchResultsActivity.class);
-				intent.putExtra("query", queryDAO.getAllQueries().get(position));
-				startActivity(new Intent(context, SearchResultsActivity.class));
+				startActivity(intent);
 			}
 		});
 	}

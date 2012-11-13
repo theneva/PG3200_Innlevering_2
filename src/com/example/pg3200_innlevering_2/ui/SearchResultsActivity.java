@@ -23,6 +23,7 @@ import com.example.pg3200_innlevering_2.R;
 import com.example.pg3200_innlevering_2.dto.FlickrImageDTO;
 import com.example.pg3200_innlevering_2.ui.adapters.ImageAdapter;
 import com.example.pg3200_innlevering_2.util.ImageUtil;
+import com.example.pg3200_innlevering_2.util.QueryUtil;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapActivity;
@@ -56,8 +57,7 @@ public class SearchResultsActivity extends MapActivity {
 		context = this;
 		
 		// retrieve the query
-		Intent myIntent = getIntent();
-		myIntent.getStringExtra("query");
+		query = QueryUtil.LAST_QUERY_USED;
 		
 		initGui();
 		initListeners();
