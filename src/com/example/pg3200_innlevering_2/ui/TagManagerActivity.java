@@ -45,7 +45,6 @@ public class TagManagerActivity extends AbstractActivity {
 		});
 		
 		listViewTags.setOnItemClickListener(new OnItemClickListener() {
-
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 				TagUtil.addTag((String) adapter.getItem(position));
 				startActivity(new Intent(context, SearchResultsActivity.class));

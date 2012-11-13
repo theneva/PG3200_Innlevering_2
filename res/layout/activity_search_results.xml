@@ -1,39 +1,53 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<TabHost
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <!-- Wrapping the buttons in a linear layout for alignment -->
-
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/buttonList"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button_list" >
-        </Button>
-
-        <Button
-            android:id="@+id/buttonMaps"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button_maps" >
-        </Button>
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/listViewImages"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/linearLayout1" >
-    </ListView>
-
-</RelativeLayout>
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+		
+		<TabWidget
+			android:id="@android:id/tabs"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content" />
+			
+		<FrameLayout
+			android:id="@android:id/tabcontent"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent" >
+			
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent" >
+				
+			    <ListView
+			        android:id="@+id/listViewImages"
+			        android:layout_width="fill_parent"
+			        android:layout_height="fill_parent"
+			        android:layout_weight="1" />
+			    
+		    </LinearLayout>
+		    
+			<RelativeLayout
+				xmlns:android="http://schemas.android.com/apk/res/android"
+				android:orientation="vertical"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent" >
+				
+				<com.google.android.maps.MapView
+					android:id="@+id/mapView"
+					android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:clickable="true"
+					android:apiKey="0WG45BuPiqL-VXb50LlqT31wTU41Wf_x-QlFKKQ" />
+			
+			</RelativeLayout>
+			
+			
+		</FrameLayout>
+	</LinearLayout>
+</TabHost>

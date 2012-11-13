@@ -10,5 +10,7 @@
 	<string name="button_list">List</string>
 	<string name="button_maps">Maps</string>
 	
+	<string name="text_view_loading">Loading...</string>
+	
 	<string name="image_view_content">An image from Flickr</string>
 </resources>

@@ -8,6 +8,7 @@ public class TagUtil {
 	private static List<String> tags = new ArrayList<String>();
 	private static String lastUsedTag;
 
+	// TODO: Rename?
 	public static boolean addTag(String tag) {
 		if (tag == null || tag.equals("") || tag.trim().equals("")) return false;
 		

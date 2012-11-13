@@ -3,7 +3,6 @@ package com.example.pg3200_innlevering_2.ui.adapters;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 
 import com.example.pg3200_innlevering_2.R;
 import com.example.pg3200_innlevering_2.dto.FlickrImageDTO;
-import com.example.pg3200_innlevering_2.util.FlickrUtil;
 
 public class ImageAdapter extends BaseAdapter{
 	
@@ -26,8 +24,9 @@ public class ImageAdapter extends BaseAdapter{
 	}
 
 	public int getCount() {
-		if (images != null) return images.size();
-		else return 0;
+		// Prevent program from crashing if no images were retrieved
+		// TODO: Give feedback
+		return images != null ? images.size() : 0;
 	}
 
 	public Object getItem(int position) {
@@ -39,7 +38,8 @@ public class ImageAdapter extends BaseAdapter{
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
-		ViewHolder viewHolder;
+
+		ViewHolder viewHolder = null;
 		
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.list_item_image, null);
@@ -51,11 +51,12 @@ public class ImageAdapter extends BaseAdapter{
 			
 			FlickrImageDTO image = images.get(position);
 			
-			Drawable drawable = FlickrUtil.getImageFromUrl(image.getUrlSq());
-			viewHolder.imageViewImage.setImageDrawable(drawable);
+			viewHolder.imageViewImage.setImageDrawable(image.getDrawableSq());
 			
 			viewHolder.textViewImageTitle.setText(image.getTitle());
 			viewHolder.textViewImageDateTaken.setText(image.getDateTaken());
+			
+			System.out.println("text views have had their text set. title = " + image.getTitle() + ", date taken = " + image.getDateTaken());
 			
 			convertView.setTag(viewHolder);
 		} else {
@@ -66,7 +67,8 @@ public class ImageAdapter extends BaseAdapter{
 	}
 	
 	private class ViewHolder {
-		private ImageView imageViewImage;
-		private TextView textViewImageTitle, textViewImageDateTaken;
+		ImageView imageViewImage;
+		TextView textViewImageTitle;
+		TextView textViewImageDateTaken;
 	}
 }

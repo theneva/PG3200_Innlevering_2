@@ -19,7 +19,8 @@ import android.graphics.drawable.Drawable;
 
 import com.example.pg3200_innlevering_2.dto.FlickrImageDTO;
 
-public class FlickrUtil {
+public class ImageUtil {
+	
 	private static final String URL = "http://api.flickr.com/services/rest/?method=flickr.photos.search&nojsoncallback=1&format=json&api_key=6b3b39e81d8f4b5f527250506e146d4b&sort=date-posteddesc&has_geo=true&extras=url_sq,url_m,geo,date_taken&per_page=10&tags=%22";
 	
 	/**
@@ -42,6 +43,7 @@ public class FlickrUtil {
 			e.printStackTrace();
 		} catch(IOException e) {
 			e.printStackTrace();
+			System.out.println("Unable to establish connection with Flickr.");
 		} finally {
 			if (urlConnection != null) {
 				urlConnection.disconnect();
@@ -71,11 +73,13 @@ public class FlickrUtil {
 				String title = image.optString("title");
 				String urlSq = image.optString("url_sq");
 				String urlM = image.optString("url_m");
-				int latitude = image.optInt("latitude");
-				int longitude = image.optInt("longitude");
+				Drawable drawableSq = ImageUtil.getImageFromUrl(urlSq);
+				Drawable drawableM = ImageUtil.getImageFromUrl(urlM);
+				double latitude = image.optDouble("latitude");
+				double longitude = image.optDouble("longitude");
 				String dateTaken = image.optString("datetaken");
 				
-				images.add(new FlickrImageDTO(title, urlSq, urlM, latitude, longitude, dateTaken));
+				images.add(new FlickrImageDTO(title, urlSq, urlM, drawableSq, drawableM, latitude, longitude, dateTaken));
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -87,7 +91,7 @@ public class FlickrUtil {
 	/**
 	 * Reads the input stream.
 	 * @param inputStream the input stream to read.
-	 * @return the stream in a String.
+	 * @return the stream converted to one String (in this case: JSON).
 	 */
 	private static String readStream(InputStream inputStream) {
 		String line;
@@ -106,14 +110,20 @@ public class FlickrUtil {
 		
 		return null;
 	}
-	
-	public static Drawable getImageFromUrl(String imageUrl) {
+
+	/**
+	 * Gets an image from the given url as a Drawable.
+	 * @param url the location of the image.
+	 * @return the retrieved Drawable.
+	 */
+	public static Drawable getImageFromUrl(String url) {
 		InputStream in = null;
 		
 		try {
-			URL url = new URL(imageUrl);
-			in = new BufferedInputStream(url.openStream());
-			return Drawable.createFromStream(in, "src");
+			in = new BufferedInputStream(new URL(url).openStream());
+			Drawable drawable = Drawable.createFromStream(in, "src");
+			System.out.println("Drawable has been created, x: " + drawable.getIntrinsicWidth() + ", y: " + drawable.getIntrinsicHeight());
+			return drawable;
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
